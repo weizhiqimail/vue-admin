@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <h3>User Center</h3>
-    </div>
+  <div>
+    <h3>User Center</h3>
+  </div>
 </template>
 
 <script>

@@ -4,9 +4,16 @@
 .el-submenu .el-menu-item {
   height: 40px;
   line-height: 40px;
+  min-width: 140px;
 }
 
 .el-menu-item-group__title {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
+}
+
+// 面包屑导航
+.el-breadcrumb {
+  line-height: 50px;
+  font-size: 16px;
 }

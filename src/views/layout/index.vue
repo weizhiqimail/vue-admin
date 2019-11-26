@@ -1,10 +1,10 @@
 <script>
-import Header from './Header';
-import MenuBar from './MenuBar';
-import Footer from './Footer';
+import MHeader from './header';
+import MenuBar from './menuBar';
+import Footer from './footer';
 
 export default {
-  name: 'Layout',
+  name: 'layout',
   components: {
     MenuBar
   },
@@ -16,26 +16,34 @@ export default {
   render () {
     return (
       <transition name="fade">
-        <div>
+        <el-container>
+          <el-aside width="140px">
+            <MenuBar/>
+          </el-aside>
           <el-container>
-            <el-aside>
-              <MenuBar/>
-            </el-aside>
-            <el-container>
-              <el-header>
-                <Header/>
-              </el-header>
-              <el-main>
-                <router-view key={this.key}/>
-              </el-main>
-              <el-footer>
-                <Footer/>
-              </el-footer>
-            </el-container>
+            <el-header class="el-header">
+              <MHeader/>
+            </el-header>
+            <el-main>
+              <router-view key={this.key}/>
+            </el-main>
+            <el-footer>
+              <Footer/>
+            </el-footer>
           </el-container>
-        </div>
+        </el-container>
       </transition>
     );
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "@/assets/styles/variables.scss";
+.el-header {
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 1px 5px 4px $box-shadow;
+}
+</style>

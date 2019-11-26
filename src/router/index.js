@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Layout from '../views/Layout';
+import Layout from '@/views/layout';
 
 Vue.use(VueRouter);
 
@@ -12,21 +12,41 @@ const routes = [
     children: [
       {
         path: 'dashboard',
-        component: () => import('@/views/Dashboard/index'),
-        name: 'Dashboard',
+        name: 'dashboard',
+        component: () => import('@/views/dashboard/index'),
         meta: {
-          title: 'Dashboard',
-          icon: 'dashboard'
+          title: '主页',
+          icon: 'home'
         }
       },
       {
         path: 'user',
-        component: () => import('@/views/User/index'),
-        name: 'User',
+        name: 'user',
+        component: () => import('@/views/user'),
         meta: {
-          title: 'User',
+          title: '用户',
           icon: 'user'
-        }
+        },
+        children: [
+          {
+            path: '/user/center',
+            name: 'user-center',
+            component: () => import('@/views/user/user-center'),
+            meta: {
+              title: '用户中心',
+              icon: 'user'
+            }
+          },
+          {
+            path: '/user/material',
+            name: 'user-material',
+            component: () => import('@/views/user/user-material'),
+            meta: {
+              title: '用户材料',
+              icon: 'material'
+            }
+          }
+        ]
       }
     ]
   }

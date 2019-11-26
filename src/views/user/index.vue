@@ -1,12 +1,13 @@
 <template>
   <div>
-    <h3>User Page</h3>
+    <h3>用户管理页面</h3>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'index'
+  name: 'user'
 };
 </script>
 

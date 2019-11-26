@@ -12,11 +12,20 @@ const routes = [
     children: [
       {
         path: 'dashboard',
-        component: () => import(/* webpackChunkName: "Dashboard" */ '@/views/Dashboard/index'),
+        component: () => import('@/views/Dashboard/index'),
         name: 'Dashboard',
         meta: {
           title: 'Dashboard',
           icon: 'dashboard'
+        }
+      },
+      {
+        path: 'user',
+        component: () => import('@/views/User/index'),
+        name: 'User',
+        meta: {
+          title: 'User',
+          icon: 'user'
         }
       }
     ]

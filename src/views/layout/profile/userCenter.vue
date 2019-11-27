@@ -9,8 +9,7 @@ export default {
   name: 'userCenter',
   methods: {
     onLogout () {
-      this.$router.push('/login');
-      console.log('user-center page leave');
+      this.$router.push(this.$constant.login);
       this.$localStorage.clear();
     }
   }

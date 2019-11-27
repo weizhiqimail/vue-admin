@@ -1,12 +1,12 @@
 <template>
-  <div class="user">
-    <router-view></router-view>
+  <div>
+    <h3>NotFound</h3>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'user'
+  name: 'NotFound'
 };
 </script>
 

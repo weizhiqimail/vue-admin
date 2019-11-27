@@ -2,8 +2,11 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Layout from '@/views/layout';
 import Login from '@/views/login';
+import NotFound from '@/views/notFound';
 
 Vue.use(VueRouter);
+
+const isProd = process.env.NODE_ENV === 'production';
 
 const routes = [
   {
@@ -64,8 +67,27 @@ const routes = [
       icon: 'login',
       auth: false
     }
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: NotFound,
+    meta: {
+      title: '页面不存在',
+      icon: '404',
+      auth: true
+    }
   }
 ];
+
+const notFoundRoute = {
+  path: '*',
+  redirect: '/404'
+};
+
+if (!isProd) {
+  routes.push(notFoundRoute);
+}
 
 const router = new VueRouter({
   mode: 'history',

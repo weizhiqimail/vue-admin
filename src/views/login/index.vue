@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import menuList from '@/config/menuList';
+
 export default {
   name: 'login',
   data () {
@@ -23,14 +25,37 @@ export default {
       form: {
         username: '',
         password: ''
-      }
+      },
+      linkList: []
     };
   },
   methods: {
+    getLinkList () {
+      this.linkList = menuList.map(menu => {
+        const children = menu.children;
+        if (children) {
+          return children.map(child => {
+            return child.link;
+          });
+        } else {
+          return menu.link;
+        }
+      }).flat();
+    },
     onLogin () {
       this.$localStorage.set('token', 'hello');
-      this.$router.push('/');
+      const { query } = this.$route;
+      const redirect = query.redirect;
+
+      if (redirect && this.linkList.includes(redirect)) {
+        this.$router.push(redirect);
+      } else {
+        this.$router.push('/');
+      }
     }
+  },
+  created () {
+    this.getLinkList();
   }
 };
 </script>

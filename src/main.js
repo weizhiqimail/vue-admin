@@ -9,6 +9,7 @@ import App from './App.vue';
 import router from './router';
 import './permission';
 import settings from './settings';
+import constant from '@/config/constant';
 
 import '@/assets/styles/index.scss';
 
@@ -18,6 +19,7 @@ Vue.use(Element, {
 
 Vue.prototype.$localStorage = localStorage;
 Vue.prototype.$settings = settings;
+Vue.prototype.$constant = constant;
 
 Vue.config.productionTip = false;
 

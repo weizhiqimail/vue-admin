@@ -53,6 +53,16 @@ const routes = [
             }
           }
         ]
+      },
+      {
+        path: 'notice',
+        name: 'notice',
+        component: () => import('@/views/notice/index'),
+        meta: {
+          title: '通知',
+          icon: 'notice',
+          auth: true
+        }
       }
     ]
   },

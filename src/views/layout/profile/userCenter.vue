@@ -1,6 +1,16 @@
 <template>
-  <div>
-    <el-button type="primary" @click="onLogout">退出</el-button>
+  <div class="column-center">
+    <el-dropdown>
+      <span class="el-dropdown-link">
+        <i class="el-icon-user-solid pr-4"></i>jack
+        <i class="el-icon-arrow-down el-icon--right"></i>
+      </span>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item>
+          <span @click="onLogout">退出</span>
+        </el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
   </div>
 </template>
 

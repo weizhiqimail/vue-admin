@@ -1,15 +1,20 @@
 <template>
-  <div>
-    <h3>notice</h3>
+  <div class="column-center">
+    <el-link @click="jumpToPage" icon="el-icon-message-solid">通知</el-link>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'notice'
+  name: 'notice',
+  methods: {
+    jumpToPage () {
+      this.$router.push('/notice');
+    }
+  }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

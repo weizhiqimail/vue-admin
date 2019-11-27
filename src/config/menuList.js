@@ -23,5 +23,11 @@ export default [
         index: '2-2'
       }
     ]
+  },
+  {
+    title: '通知',
+    link: '/notice',
+    icon: 'notice',
+    index: '3'
   }
 ];

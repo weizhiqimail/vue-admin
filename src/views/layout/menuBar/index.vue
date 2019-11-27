@@ -6,20 +6,23 @@ export default {
   data () {
     return {
       menuList,
-      defaultOpened: ['1', '1']
+      activeMenu: ''
     };
   },
   render () {
     return (
-      <el-menu default-openeds={this.defaultOpened}
-        router={true}
+      <el-menu
+        default-active={this.activeMenu}
+        onSelect={this.handleSelect}
       >
         {
           this.menuList.map(menu => {
             const children = menu.children;
             if (!children) {
               return (
-                <el-menu-item index={menu.link}>{menu.title}</el-menu-item>
+                <router-link to={menu.link}>
+                  <el-menu-item index={menu.index}>{menu.title}</el-menu-item>
+                </router-link>
               );
             } else {
               return (
@@ -30,7 +33,9 @@ export default {
                       {
                         menu.children.map(child => {
                           return (
-                            <el-menu-item index={child.link}>{child.title}</el-menu-item>
+                            <router-link to={child.link}>
+                              <el-menu-item index={child.index}>{child.title}</el-menu-item>
+                            </router-link>
                           );
                         })
                       }
@@ -43,10 +48,53 @@ export default {
         }
       </el-menu>
     );
+  },
+  methods: {
+    handleSelect (currentIndex, indexArray) {
+      this.activeMenu = currentIndex;
+      this.$localStorage.set('activeMenu', this.activeMenu);
+    },
+    getRedirectIndex () {
+      const { path } = this.$route;
+
+      let menuLength = menuList.length;
+      let currentMenu;
+      for (let i = 0; i < menuLength; i++) {
+        const menu = menuList[i];
+        const children = menu.children;
+        if (children) {
+          let childrenLength = children.length;
+          for (let j = 0; j < childrenLength; j++) {
+            const child = children[j];
+            if (child['link'] === path) {
+              currentMenu = child;
+              break;
+            }
+          }
+        } else {
+          if (menu['link'] === path) {
+            currentMenu = menu;
+            break;
+          }
+        }
+      }
+      return currentMenu;
+    }
+  },
+  created () {
+    const currentMenu = this.getRedirectIndex();
+    if (currentMenu) {
+      this.activeMenu = currentMenu.index;
+    } else {
+      let activeMenu = this.$localStorage.get('activeMenu');
+      if (activeMenu) {
+        this.activeMenu = activeMenu;
+      } else {
+        this.activeMenu = '1';
+      }
+    }
   }
 };
 </script>
 
-<style scoped>
-
-</style>
+<style lang="scss" scoped></style>

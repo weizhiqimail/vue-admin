@@ -22,6 +22,10 @@
   flex-direction: column;
 }
 
+a {
+  text-decoration: none;
+}
+
 @for $i from 0 through 30 {
   .pt-#{$i} {
     padding-top: $i * 0.1rem;

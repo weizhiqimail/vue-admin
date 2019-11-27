@@ -1,8 +1,12 @@
 <script>
 import menuList from '@/config/menuList';
+import routeMixin from '@/helper/mixins/route';
+import * as TYPES from '@/store/mutationTypes';
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'menuBar',
+  mixins: [routeMixin],
   data () {
     return {
       menuList,
@@ -53,36 +57,25 @@ export default {
     handleSelect (currentIndex, indexArray) {
       this.activeMenu = currentIndex;
       this.$localStorage.set('activeMenu', this.activeMenu);
-    },
-    getRedirectIndex () {
-      const { path } = this.$route;
 
-      let menuLength = menuList.length;
-      let currentMenu;
-      for (let i = 0; i < menuLength; i++) {
-        const menu = menuList[i];
-        const children = menu.children;
-        if (children) {
-          let childrenLength = children.length;
-          for (let j = 0; j < childrenLength; j++) {
-            const child = children[j];
-            if (child['link'] === path) {
-              currentMenu = child;
-              break;
-            }
-          }
-        } else {
-          if (menu['link'] === path) {
-            currentMenu = menu;
-            break;
-          }
-        }
+      const menu = menuList.find(m => m.index === indexArray[0]);
+      let subMenu;
+      const children = menu.children;
+      if (children) {
+        subMenu = children.find(child => child.index === indexArray[1]);
       }
-      return currentMenu;
-    }
+      let breadMenu = [menu];
+      if (subMenu) {
+        breadMenu.push(subMenu);
+      }
+      this.setBreadList(breadMenu);
+    },
+    ...mapMutations({
+      setBreadList: TYPES.BREAD_LIST
+    })
   },
   created () {
-    const currentMenu = this.getRedirectIndex();
+    const currentMenu = this.getCurrentMenu(menuList);
     if (currentMenu) {
       this.activeMenu = currentMenu.index;
     } else {

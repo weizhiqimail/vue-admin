@@ -1,35 +1,26 @@
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'navBar',
   data () {
-    return {
-      breadcrumbList: [
-        {
-          title: '首页',
-          to: {
-            path: '/'
-          }
-        }
-      ]
-    };
+    return {};
   },
   render () {
     return (
       <div class="navbar">
         <el-breadcrumb separator="/">
           {
-            this.breadcrumbList.map(breadcrumb => {
-              const to = breadcrumb.to;
-              return (
-                <el-breadcrumb-item className="cursor-pointer"
-                  to={{ path: to.path }}
-                >{breadcrumb.title}</el-breadcrumb-item>
-              );
-            })
+            this.breadList.map(breadcrumb => (<el-breadcrumb-item className="cursor-pointer">{breadcrumb.title}</el-breadcrumb-item>))
           }
         </el-breadcrumb>
       </div>
     );
+  },
+  computed: {
+    ...mapGetters([
+      'breadList'
+    ])
   }
 };
 </script>

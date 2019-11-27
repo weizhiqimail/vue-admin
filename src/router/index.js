@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Layout from '@/views/layout';
+import Login from '@/views/login';
 
 Vue.use(VueRouter);
 
@@ -16,7 +17,8 @@ const routes = [
         component: () => import('@/views/dashboard/index'),
         meta: {
           title: '主页',
-          icon: 'home'
+          icon: 'home',
+          auth: true
         }
       },
       {
@@ -25,7 +27,8 @@ const routes = [
         component: () => import('@/views/user'),
         meta: {
           title: '用户',
-          icon: 'user'
+          icon: 'user',
+          auth: true
         },
         children: [
           {
@@ -34,7 +37,8 @@ const routes = [
             component: () => import('@/views/user/user-center'),
             meta: {
               title: '用户中心',
-              icon: 'user'
+              icon: 'user',
+              auth: true
             }
           },
           {
@@ -43,12 +47,23 @@ const routes = [
             component: () => import('@/views/user/user-material'),
             meta: {
               title: '用户材料',
-              icon: 'material'
+              icon: 'material',
+              auth: true
             }
           }
         ]
       }
     ]
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+    meta: {
+      title: '登录',
+      icon: 'login',
+      auth: false
+    }
   }
 ];
 

@@ -7,6 +7,7 @@ import 'normalize.css/normalize.css';
 
 import App from './App.vue';
 import router from './router';
+import './permission';
 import settings from './settings';
 
 import '@/assets/styles/index.scss';

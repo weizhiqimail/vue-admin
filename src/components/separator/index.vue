@@ -1,10 +1,11 @@
 <script>
 export default {
   name: 'separator',
-  data () {
-    return {
-      mark: '|'
-    };
+  props: {
+    mark: {
+      type: String,
+      default: '|'
+    }
   },
   render () {
     return (

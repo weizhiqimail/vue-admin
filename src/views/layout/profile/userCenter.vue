@@ -1,12 +1,19 @@
 <template>
   <div>
-    <h3>user center</h3>
+    <el-button type="primary" @click="onLogout">退出</el-button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'userCenter'
+  name: 'userCenter',
+  methods: {
+    onLogout () {
+      this.$router.push('/login');
+      console.log('user-center page leave');
+      this.$localStorage.clear();
+    }
+  }
 };
 </script>
 

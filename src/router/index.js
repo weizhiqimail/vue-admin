@@ -6,8 +6,6 @@ import NotFound from '@/views/notFound';
 
 Vue.use(VueRouter);
 
-const isProd = process.env.NODE_ENV === 'production';
-
 const routes = [
   {
     path: '/',
@@ -77,17 +75,12 @@ const routes = [
       icon: '404',
       auth: true
     }
+  },
+  {
+    path: '*',
+    redirect: '/404'
   }
 ];
-
-const notFoundRoute = {
-  path: '*',
-  redirect: '/404'
-};
-
-if (!isProd) {
-  routes.push(notFoundRoute);
-}
 
 const router = new VueRouter({
   mode: 'history',
